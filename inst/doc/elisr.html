@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>elisr companion</title>
+
+<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">elisr companion</h1>
+
+
+
+<div id="exploratory-likert-scaling-in-r" class="section level3">
+<h3>Exploratory Likert Scaling in R</h3>
+<p><code>elisr</code> is a shorthand for Exploratory Likert Scaling (ELiS) in R. ELiS is a multiple one-dimensional scaling approach and operates on a bottom-up selection process that integrates characteristic values of classical test theory. This technical companion is a step-by-step approach on how to use <code>elisr</code>. At the end of this manual, you will have gained enough understanding to confidently perform analysis in this framework. By working through the following examples, you will not only grasp what is going on under the hood, but also encounter some benefits of this approach. Note however, that this is mainly thought as a how-to. For a more complete view on the heuristic potential that lays out with this approach, you might want to take a look in the cited paper(s), too. There is at least one article [in progress] which is not yet mentioned. I will update the list of articles as soon as possible.</p>
+</div>
+<div id="important-note" class="section level3">
+<h3>Important note</h3>
+<p>It cannot be stressed often enough, that after exploring your data set with <code>disjoint()</code> and <code>overlap()</code> you need to process the result. Additional analysis is essential. You can find a way to proceed (with a follow-up analysis) in the last section. Alright, let’s ease up and dive deeper into some of <code>elisr</code>’s fiddly technical details.</p>
+</div>
+<div id="the-two-workhorses-disjoint-overlap" class="section level2">
+<h2>The two workhorses: <code>disjoint()</code> &amp; <code>overlap()</code></h2>
+<p><code>elisr</code> basically consists of two user functions <code>disjoint()</code> and <code>overlap()</code>. With a typical case in mind, the practical difference between them is: <code>disjoint()</code> is set up to produce sharp and disjoint scale fragments. Sharp and disjoint fragments feature a high internal consistency. Thus, items within such a fragment share a strong linear relationship with each another. The thing with <code>disjoint()</code> is, it allocates any item to a particular fragment. This is where <code>overlap()</code> steps in. Passing fragments to <code>overlap()</code>, the function’s underlying algorithm tries to enrich each fragment. The emerging scales are flavored with items from your specified data frame, but the algorithm skips those that are already built into a fragment (step 1). We will talk about the inclusion criterion later in much greater detail. To get to the point: Using <code>overlap()</code> an item can appear in more than one of the enriched fragments. In doing so, we overcome the splitting effect <code>disjoint()</code> induces. These basic principles unfold one step at a time throughout the rest of this companion. So, stay tuned!</p>
+<blockquote>
+<p><strong>Spoiler alert</strong>: Let me tempt you with this; the last section did already reveal the key strategy of an exploratory scale analysis using <code>elisr</code>. If you consult the bottom-up item-selection procedure for advice, you will often find yourself following these two steps: (1) Instruct <code>disjoint()</code> to produce a couple of sharp, disjoint scale fragments. (2) Let <code>overlap()</code> pick up (and expand) the pieces to complete the scales.</p>
+</blockquote>
+<div id="a-primer-for-monitoring-the-scale-development-process" class="section level3">
+<h3>A primer for monitoring the scale development process</h3>
+<p>In preparation for the upcoming analyses, I want to lose a word about how <code>elisr</code> keeps track of the development process of a scale. There are 3 monitoring devices: <code>mrit</code>, <code>alpha</code>, and <code>rbar</code>. <code>mrit</code> stands for “<em>marginal</em> corrected item-total correlation.” <code>mrit</code> displays the relationship between the sum-score of the items in a fragment <em>at some specific point of the scale development process</em> and an item which is considered for admission. I use a part-whole-correction to compute this value. So, the item (which is considered for admission) is not part of the sum-score. A lot about this is said in later chapters, in the references, or if you type <code>?print.msdf</code>. All right, let’s move on. The marginal part (italic) applies for <code>alpha</code> and <code>rbar</code>, too. But “Cronbach’s alpha” (<code>alpha</code>) gauges the internal consistency of a scale whereas <code>rbar</code> tracks the average inter-item correlation. That is basically it. Now, we can start analyzing the <code>trust</code> items.</p>
+</div>
+</div>
+<div id="analyzing-the-trust-items" class="section level2">
+<h2>Analyzing the trust items</h2>
+<p>Let’s jump right into practice. <code>trust</code> is going to be the data base in the upcoming units. <code>trust</code> is a subset of the German General Social Survey (ALLBUS) 2018 in which participants answered a couple of questions on their trust in public institutions and organizations (type <code>?trust</code>). Because the data frame is already built into <code>elisr</code>, we have easy access to it.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(elisr) ; <span class="fu">data</span>(trust) ; <span class="fu">head</span>(trust)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Welcome to elisr!</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   healserv fccourt bundtag munadmin judsyst tv newsppr uni fedgovt police</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1        6       7       5        5       3  7       6   4       5      5</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2        5       5       4        5       3  3       4   5       2      5</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3        6       6       6        3       6  4       4   5       6      5</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4        6       4       3        3       3  1       1   3       3      3</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5        5       1       1        4       2  1       1   5       1      2</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6        5       5       5        7       4  4       3   4       6      7</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   polpati eucomisn eupalmnt</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1       4        3        4</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2       1        4        4</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3       5        4        4</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4       3        3        3</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5       1        1        1</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6       4       NA        5</span></span></code></pre></div>
+<p>Great. The output shows the first six values of each variable of the <code>trust</code> data set. But since we want to have a look under <code>elisr</code>’s hood, we should get the machinery working. First, we inspect <code>disjoint()</code> and then move on to <code>overlap()</code>.</p>
+<div id="disjoint" class="section level3">
+<h3>disjoint()</h3>
+<p>In the following snippets, we will use a disjoint scaling procedure to produce a couple of sharp fragments. For that reason, we consult <code>disjoint()</code>. Using <code>disjoint()</code> we will first smash the data set to smithereens. Therefore, we need to learn about <code>mrit_min</code>. After that, we will talk a little bit about the thing you have produced, a <code>msdf</code>. Then, we go over some terminology, and finally talk a little more about the output itself.</p>
+<div id="mrit_min" class="section level4">
+<h4>mrit_min</h4>
+<p>To smash the scale (and produce the desired sharp fragments), we set up <code>disjoint()</code> with a high value for the <em>marginal corrected item-total correlation</em> <code>mrit_min</code>. Think of <code>mrit_min</code> as definition of a fragment’s lower boundary. It comes in the form of a correlation ranging between 0 and 1 (see <code>?disjoint</code>). So below this value you are not willing to accept an item to be integrated into any of the emerging fragments. One could also say, you forbid <code>disjoint()</code> to incorporate such items. All right, let’s put things into practice. Because <code>mrit_min = 0.55</code> produced satisfactory results in some of my own prior analyses I will stick with it for now. But feel free to play around with this value (to fully understand its behavior).</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># `(foo &lt;- baz)`: assign and print in one step</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>(msdf <span class="ot">&lt;-</span>  <span class="fu">disjoint</span>(<span class="at">df =</span> trust, <span class="at">mrit_min =</span> <span class="fl">0.55</span>))</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $scl_1</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    mrit rbar alpha</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; eupalmnt, eucomisn 0.92 0.92  0.96</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; polpati            0.64 0.72  0.89</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; fedgovt            0.68 0.67  0.89</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; bundtag            0.70 0.64  0.90</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; judsyst            0.58 0.59  0.90</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; fccourt            0.58 0.55  0.90</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $scl_2</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             mrit rbar alpha</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; newsppr, tv 0.67 0.67   0.8</span></span></code></pre></div>
+</div>
+<div id="msdf" class="section level4">
+<h4>msdf</h4>
+<p>The above output shows summary statistics (our well-known <code>mrit</code>, <code>rbar</code>, and <code>alpha</code>) of a multiple scaled data frame (<code>msdf</code>). Think of <code>msdf</code>s as named <code>list</code>s extended with a couple of attributes for internal computational reasons (see <code>attributes(msdf)</code>). If you cannot see the output I am currently talking about, something went wrong. If everything ran smoothly you can skip the <strong>Help &amp; Advice</strong> section to continue.</p>
+<blockquote>
+<p><strong>Help &amp; Advice</strong>: Okay, something went wrong. First of all,<code>disjoint()</code> (and <code>overlap()</code>) actually complain about quite a number of things. Hopefully, the provided messages are sensible enough to let you cope with the particular obstacle. So, if a brilliant orange advice shines out of your console, read the message carefully (and try to follow instructions). My first guess would always be a typo. These little goblins are nasty everyday companions in applied research. But if you cannot encrypt the error message, hack it into Google.</p>
+</blockquote>
+<p>Done? Alright, then we can go over to the terminology part and then learn something more about <code>disjoint()</code>’s machinery.</p>
+</div>
+<div id="some-terminology" class="section level4">
+<h4>Some terminology</h4>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>msdf</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $scl_1</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    mrit rbar alpha</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; eupalmnt, eucomisn 0.92 0.92  0.96</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; polpati            0.64 0.72  0.89</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; fedgovt            0.68 0.67  0.89</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; bundtag            0.70 0.64  0.90</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; judsyst            0.58 0.59  0.90</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; fccourt            0.58 0.55  0.90</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $scl_2</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             mrit rbar alpha</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; newsppr, tv 0.67 0.67   0.8</span></span></code></pre></div>
+<p>Focus on <code>$scl_1</code>. I will refer to objects like <code>scl_1</code> (read as: scale one) generally, as <em>fragments</em>. Now take a closer look at <code>eupalmnt</code>, <code>eucomisn</code> (read as: EU Parliament &amp; EU Commission). This comma-separated pair of two items in the first line is the <em>core</em> of <code>scl_1</code>. The core highlights the result of the first step of the scaling procedure – a <em>two-item scale</em>. As we can see, the core of <code>scl_1</code> contains the two variables that share the highest positive linear association in the data frame (<code>mrit = rbar = 0.92</code>). To find it, <code>disjoint()</code> (and <code>overlap()</code>) sets up a correlation matrix internally and asks for the one (correlation) that is the highest of them all.</p>
+<blockquote>
+<p><strong>Note</strong>: If multiple pairs share the same positive linear relationship, <code>disjoint()</code> will always choose the first one in order.</p>
+</blockquote>
+<p>It is important to mention, that in search of the highest correlation neither <code>disjoint()</code> nor <code>overlap()</code> will go on forever. To become a bit more precise, both functions give up the search, when the data frame lacks a correlation that exceeds your preset <code>mrit_min</code>. For convenience, <code>disjoint()</code> owns a test function for this purpose. If you want to try it out type <code>disjoint(trust, mrit_min=.95)</code></p>
+</div>
+<div id="under-disjoints-hood" class="section level4">
+<h4>Under disjoint()’s hood</h4>
+<p>In the prior analysis everything ran smoothly. So let’s put this result back on the screen and refocus on the algorithm again. We were looking for the highest correlation which sets up the core. To simplify the forthcoming procedure, remember our previous <code>mrit_min = 0.55</code>.</p>
+<blockquote>
+<p><strong>Note</strong>: If the value of <code>mrit_min</code> slipped your mind, read out <code>msdf</code>’s attributes as a reminder (type <code>attributes(msdf)</code>)</p>
+</blockquote>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>msdf</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $scl_1</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    mrit rbar alpha</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; eupalmnt, eucomisn 0.92 0.92  0.96</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; polpati            0.64 0.72  0.89</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; fedgovt            0.68 0.67  0.89</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; bundtag            0.70 0.64  0.90</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; judsyst            0.58 0.59  0.90</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; fccourt            0.58 0.55  0.90</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $scl_2</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             mrit rbar alpha</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; newsppr, tv 0.67 0.67   0.8</span></span></code></pre></div>
+<p>In the first line we can see that the core consists of <code>eupalmnt</code> and <code>eucomisn</code>. As mentioned above, both variables share the highest correlation (which is obviously greater than our prespecified <code>mrit_min = 0.55</code>): <code>mrit = 0.92</code>. But once the core was found, what happened to <code>scl_1</code> ? Let’s throw a quick glance under <code>disjoint()</code>’s hood:</p>
+<div id="scl_1" class="section level5">
+<h5>scl_1</h5>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>msdf</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $scl_1</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    mrit rbar alpha</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; eupalmnt, eucomisn 0.92 0.92  0.96</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; polpati            0.64 0.72  0.89</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; fedgovt            0.68 0.67  0.89</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; bundtag            0.70 0.64  0.90</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; judsyst            0.58 0.59  0.90</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; fccourt            0.58 0.55  0.90</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $scl_2</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             mrit rbar alpha</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; newsppr, tv 0.67 0.67   0.8</span></span></code></pre></div>
+<p>First, <code>disjoint()</code> added up the core items what created a <em>sum-score</em>. Subsequently, <code>disjoint()</code> watched out for the highest correlation between this sum-score and another <code>trust</code> variable in the data frame. It found <code>polpati</code>. Because <code>polpati</code>’s correlation with the sum-score (its <em>corrected item-total correlation</em>) is higher than the specified stop criterion (<code>mrit_min = 0.55</code>) it was melted into the core. The new fragment is now a bundle of 3 Items: <code>eupalmnt</code>, <code>eucomisn</code>, and <code>polpati.</code> The same logic applies to the inclusion of the other variables (e.g., <code>fedgovt</code> et al.) and reveals the second step of the algorithmic procedure: Continue to collect new items from <code>df = trust</code>, until the correlation between the sum-score of the items in the fragment and any other item is less than your prespecified <code>mrit_min.</code></p>
+</div>
+<div id="scl_2" class="section level5">
+<h5>scl_2</h5>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>msdf</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $scl_1</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    mrit rbar alpha</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; eupalmnt, eucomisn 0.92 0.92  0.96</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; polpati            0.64 0.72  0.89</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; fedgovt            0.68 0.67  0.89</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; bundtag            0.70 0.64  0.90</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; judsyst            0.58 0.59  0.90</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; fccourt            0.58 0.55  0.90</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $scl_2</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             mrit rbar alpha</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; newsppr, tv 0.67 0.67   0.8</span></span></code></pre></div>
+<p>Now let’s focus on <code>$scl_2</code>. <code>scl_2</code> should raise the question, why another two-item scale emerges. First, it seems as if the stop criterion did fail. The <code>mrit</code> value at the end of <code>scl_1</code> is <code>0.58</code>. But at the beginning of <code>scl_2</code> <code>mrit = 0.67</code>. What is going on here? Well, the algorithm forces <code>disjoint()</code> to build (and enrich) new fragments, like <code>scl_1</code>, as long as there are remaining items in your data set. More specifically, the algorithm stops only if (a) there is no variable that meets the inclusion criterion, or (b) it soaked up the last remaining variable in the data frame.</p>
+<p>In addition, (a) also holds for the construction process of new fragments. But when the algorithm builds a new fragment in particular, it needs (b) at least two leftovers – because a single variable cannot make up a core. So again, <code>disjoint()</code> will not build (and enrich) new fragments at any costs. The necessary correlations need to be positive and higher than your prespecified minimum value. That unmasks the last unique step of the disjoint scaling procedure: If the algorithm detects some remaining items in the data set that meet its specific requirements, it starts over again. Now we know why <code>disjoint()</code> started another two-item scale – the algorithm demanded it.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>msdf</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $scl_1</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    mrit rbar alpha</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; eupalmnt, eucomisn 0.92 0.92  0.96</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; polpati            0.64 0.72  0.89</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; fedgovt            0.68 0.67  0.89</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; bundtag            0.70 0.64  0.90</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; judsyst            0.58 0.59  0.90</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; fccourt            0.58 0.55  0.90</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $scl_2</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             mrit rbar alpha</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; newsppr, tv 0.67 0.67   0.8</span></span></code></pre></div>
+</div>
+</div>
+<div id="a-quick-summary" class="section level4">
+<h4>A quick summary</h4>
+<p>To sum up, you could test your understanding against the following question: Why is there <em>no</em> other variable in <code>scl_2</code>? Right, although there are 13 variables in the data frame, there is no other variable among them that meets the internally defined inclusion criterion (the sum-score of the whole fragment is greater than the preset <code>mrit_min</code>). As a consequence, <code>disjoint()</code> did not merge another variable into <code>{eupalmnt, eucomisn}</code>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>msdf</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $scl_1</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    mrit rbar alpha</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; eupalmnt, eucomisn 0.92 0.92  0.96</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; polpati            0.64 0.72  0.89</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; fedgovt            0.68 0.67  0.89</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; bundtag            0.70 0.64  0.90</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; judsyst            0.58 0.59  0.90</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; fccourt            0.58 0.55  0.90</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $scl_2</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             mrit rbar alpha</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; newsppr, tv 0.67 0.67   0.8</span></span></code></pre></div>
+</div>
+<div id="conclusion" class="section level4">
+<h4>Conclusion</h4>
+<p>To conclude, let’s remind ourselves of <code>disjoint()</code>’s job description (building disjoint scale fragments). If you recap the last steps, you will find that <code>disjoint()</code> successfully did its job. In the output each variable (from <code>eupalmnt</code> to <code>tv</code>) is present in either <code>scl_1</code> or <code>scl_2</code> exactly once. To put it another way, there is no intersecting variable which overlaps in these two fragments.</p>
+<blockquote>
+<p><strong>Note</strong>: To ensure disjointedness, the functions exclude a variable after assigning it to a fragment. In advance of the upcoming section keep this result in mind.</p>
+</blockquote>
+</div>
+</div>
+<div id="print.msdf" class="section level3">
+<h3>print.msdf()</h3>
+<p>Before we enlarge the disjointedly built fragments, we should reprint the primary output. The following snippet does this though a little different. As you can see, I explicitly wrapped the expression in <code>print()</code> and set the <code>digits</code> argument. In the R side note below I will explain why.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pint output to n decimal places (default=2)</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(msdf, <span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $scl_1</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                     mrit  rbar alpha</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; eupalmnt, eucomisn 0.918 0.918 0.957</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; polpati            0.635 0.721 0.886</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; fedgovt            0.677 0.667 0.889</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; bundtag            0.699 0.641 0.899</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; judsyst            0.579 0.588 0.895</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; fccourt            0.582 0.554 0.897</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $scl_2</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;              mrit  rbar alpha</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; newsppr, tv 0.669 0.669 0.802</span></span></code></pre></div>
+<blockquote>
+<p><strong>Note</strong>: When calling <code>msdf</code> R internally wraps the expression in <code>print()</code>. Thus, <code>msdf</code> is a shortcut for <code>print(msdf)</code>. Both methods can be used interchangeably. But if you want to set printing options (see <code>?option</code>) you need to explicitly call <code>print()</code> with the desired option (e.g., <code>digits = 3</code>). Note, however, that I wrote custom function to print <code>msdf</code> objects. As a consequence,<code>print()</code> actually passes the work on to <code>print.msdf()</code>. To get straight to the point, <code>print()</code> owns a nice way to print the result to a specified number of digits, so I equipped <code>print.msdf()</code> with that feature as well. The default is set to <code>2</code>. But be aware of the fact that omitting tons of decimal places does not mean the result is accurately rounded to the specified ones. Anyway, I decided to avoid rounding in the result. The reason therefor is R’s (as I find it, deeply confusing) rounding standard – IEC 60559 (see <code>?round</code>). So, if you get into the situation where you need to report more than two decimal places, expand the result using <code>digits = n</code> and choose whatever standard you like.</p>
+</blockquote>
+</div>
+<div id="overlap" class="section level3">
+<h3>overlap()</h3>
+<p>In this chapter we use the overlapping scaling procedure to extend out disjointedly built fragments. That is the job of <code>overlap()</code>. Therefore, we first need to learn about <code>mrit_min</code> (again). This will open up <code>overlap()</code>’s hood. After that we will continue with a closer look inside its machinery.</p>
+<blockquote>
+<p><strong>Tip</strong>: When you want to know, if a given object is a <code>msdf</code> use <code>is.msdf()</code>. Type <code>?is.msdf</code> for more details.</p>
+</blockquote>
+<div id="mrit_min-again" class="section level4">
+<h4>mrit_min (again)</h4>
+<p>Let’s resume and try to extend the disjointedly built fragments. To do that, we (re-)consider the inclusion of every item in the data set that is not yet part of a given fragment (simply because of <code>disjoint()</code>’s nature). As a consequence, we will overcome <code>disjoint()</code>’s disjointedness. The following two paragraphs will lay out this idea in much greater detail. But for now, let’s jump straight into action. We start with a word on the stop criterion.</p>
+<p>With <code>disjoint()</code> we use a high value for the stop criterion to smash the scale. Now we use it to soak up up additional items from (what we will later call) the counterpart. Leave aside the counterpart for now. Remember the description of <code>mrit_min</code> instead. <code>mrit_min</code>is the definition of a fragment’s lower boundary and ranges between 0 and 1. This is also true for <code>overlap()</code> (type <code>?overlap</code>). What changes for the additional <code>mrit_min</code> is, it defines the limit under which you are not be willing to accept an item to <em>complete</em> an emerging <em>scale</em>. What does that means in practical terms? Well, deregulate <code>overlap()</code>’s <code>mrit_min</code> – to allow <code>overlap()</code> to soak up additional items from your data set. In the following snippet I stick with <code>mrit_min = 0.4</code>. But feel free to noodle around with this value. This helps you to fully understand <code>mrit_min</code>’s behavior within <code>overlap()</code>.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>(mosdf <span class="ot">&lt;-</span> <span class="fu">overlap</span>(msdf, <span class="at">mrit_min =</span> <span class="fl">0.4</span>))</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $scl_1</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    mrit rbar alpha</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; eupalmnt, eucomisn 0.92 0.92  0.96</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; polpati            0.64 0.72  0.89</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; fedgovt            0.68 0.67  0.89</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; bundtag            0.70 0.64  0.90</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; judsyst            0.58 0.59  0.90</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; fccourt            0.58 0.55  0.90</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; police             0.52 0.52  0.90</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; newsppr            0.52 0.49  0.90</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tv                 0.52 0.47  0.90</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; uni                0.49 0.45  0.90</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; munadmin           0.47 0.43  0.90</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; healserv           0.42 0.40  0.90</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $scl_2</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             mrit rbar alpha</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; newsppr, tv 0.67 0.67  0.80</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; polpati     0.48 0.51  0.76</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; eucomisn    0.57 0.49  0.80</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; eupalmnt    0.73 0.53  0.85</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; fedgovt     0.67 0.53  0.87</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; bundtag     0.69 0.53  0.89</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; judsyst     0.58 0.51  0.89</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; fccourt     0.57 0.49  0.90</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; police      0.52 0.47  0.90</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; uni         0.49 0.45  0.90</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; munadmin    0.47 0.43  0.90</span></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; healserv    0.42 0.40  0.90</span></span></code></pre></div>
+</div>
+<div id="under-overlaps-hood" class="section level4">
+<h4>Under overlap()’s hood</h4>
+<p>The output reveals the news: <code>overlap()</code> added a couple of variables to <code>disjoint()</code>’s fragments. But what happens inside the machinery? Well, first <code>overlap()</code> finds all items in the data frame that are not part of the given fragment. Let’s call that bundle its counterpart. Think of the counterpart as all variables in the specified data frame minus the items within the fragment. Accordingly, for <code>scl_1</code>, the counterpart is made up of <code>newsppr</code>, <code>tv</code>, <code>healserv</code>, <code>munadmin</code>, <code>uni</code> and <code>police</code>. The second step is merely a repetition. <code>overlap()</code> starts the previously described scaling procedure in each case over again. It thus continuously enriches each fragment with the according items from the counterpart – as long as the correlation between the sum-score of all items and any other item is higher than the specified <code>mrit_min = 0.4</code>. To put it another way, <code>overlap()</code> takes the disjoint fragments as its basis when trying to extend each of them. That is why the default option is called <code>overlap_with = &quot;fragments&quot;</code>.</p>
+<blockquote>
+<p><strong>Note</strong>: Additionally, <code>overlap()</code> provides the option to choose only the highest positively correlating pair of each scale fragment (<code>overlap_with = &quot;core&quot;</code>). Type <code>?overlap</code> for more details.</p>
+</blockquote>
+<div id="a-small-excursion" class="section level5">
+<h5>A small excursion</h5>
+<p>Let me cite one additional result in form of a question. Did you realize that both fragments (<code>scl_1</code> and <code>scl_2</code>) include exactly the same variables? The scales did actually replicate. This hints to unidimensionality. For more on this consult the reference section.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(<span class="fu">list</span>(<span class="at">msdf =</span> mosdf<span class="sc">$</span>scl_1, <span class="at">mosdf =</span> mosdf<span class="sc">$</span>scl_2), colnames)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $msdf</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [1] &quot;eupalmnt&quot; &quot;eucomisn&quot; &quot;polpati&quot;  &quot;fedgovt&quot;  &quot;bundtag&quot;  &quot;judsyst&quot; </span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [7] &quot;fccourt&quot;  &quot;police&quot;   &quot;newsppr&quot;  &quot;tv&quot;       &quot;uni&quot;      &quot;munadmin&quot;</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [13] &quot;healserv&quot;</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $mosdf</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [1] &quot;newsppr&quot;  &quot;tv&quot;       &quot;polpati&quot;  &quot;eucomisn&quot; &quot;eupalmnt&quot; &quot;fedgovt&quot; </span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [7] &quot;bundtag&quot;  &quot;judsyst&quot;  &quot;fccourt&quot;  &quot;police&quot;   &quot;uni&quot;      &quot;munadmin&quot;</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [13] &quot;healserv&quot;</span></span></code></pre></div>
+</div>
+</div>
+<div id="a-quick-summary-1" class="section level4">
+<h4>A quick summary</h4>
+<p>All right, let’s pull it all together now. From the last two outputs you might have already guessed the bread and butter of <code>overlap()</code>’s operating principles. The function enhances the disjoint scaling approach by gradually applying its underlying algorithm to multiple disjoint fragments. For the extension itself the function considers only items from the according counterpart. That is what we have seen so far. But now we need to move on and further discuss the emergence of the duplicates across scales.</p>
+<div id="multiple-memberships-duplicates-across-scales" class="section level5">
+<h5>Multiple memberships – duplicates across scales</h5>
+<p>Let me present the key idea in a nutshell: Even if a particular item is already part of <code>scl_1</code> it still meets the preset inclusion criterion in <code>scl_2</code>. So why not tagging it relevant for the developing scale, too? Well, that is precisely what <code>overlap()</code> does. This insight is twofold. (1) It points out the key mechanism when setting <code>mrit_min</code>: The more fragments <code>disjoint()</code> produces the more reason you give <code>overlap()</code> to pick up on (and expand) those pieces. It now goes without saying that we use only reasonable items for the extension (i.e., those items from the counterpart which meet the inclusion requirements). (2) We could actually overcome <code>disjoint()</code>’s disjointedness. If this sounds like science-fiction talk visit the references for more background.</p>
+</div>
+</div>
+<div id="conclusion-1" class="section level4">
+<h4>Conclusion</h4>
+<p>The last last steps made us stumble upon a real benefit of this approach. The achievement is best documented in the previous example: The scales replicated. The reason is, Exploratory Likert Scaling does <em>not</em> induce differences as natural part of the procedure itself. To put it another way, although <code>disjoint()</code> smashes a data set, <code>elisr</code> provides a way out of the self-induced disjointedness – <code>overlap()</code>. That is why <code>overlap()</code> is not only a possibility to explore how the scales reunite, but a way to monitor how each scale evolve. Remember <code>mrit</code>, <code>rbar</code>, and <code>alpha</code>(?).</p>
+</div>
+</div>
+<div id="an-all-in-one-snippet" class="section level3">
+<h3>An all-in-one snippet</h3>
+<p>What we know so far is that, even though we crushed the list of items using <code>disjoint()</code>, we permitted <code>overlap()</code> to further process it. Note, that if we forced the fragments to be different beforehand, we would have masked the replication discovery itself. Breaking and reuniting often goes hand in hand, therefor we should learn how to combine the use of <code>disjoint()</code> and <code>overlap()</code> next.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>msdf <span class="ot">&lt;-</span> <span class="fu">overlap</span>(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">disjoint</span>(<span class="at">df =</span> trust, <span class="at">mrit_min =</span> <span class="fl">0.55</span>),</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mrit_min =</span> <span class="fl">0.4</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+</div>
+</div>
+<div id="further-analysis-of-the-trust-items" class="section level2">
+<h2>Further analysis of the trust items</h2>
+<p>In everyday research, one will usually fall over reversed items. Such variables are broadly used to diminish response bias and reveal themselves generally through a negative correlation in the correlation matrix. Because there are no reversed variables in <code>trust</code> we need to make up an artificial one.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ntrust <span class="ot">&lt;-</span> <span class="fu">within</span>(trust, uni <span class="ot">&lt;-</span> <span class="dv">8</span> <span class="sc">-</span> uni)</span></code></pre></div>
+<p>What this code does, is to subtract 8 from each value in <code>uni</code>, reassign it and store the result in a new data frame called <code>ntrust</code>. From here, we can start all over again using our all-in-one snippet. The only thing we need to add is <code>negative_too = TRUE</code> and specify the start- and endpoint of the scale (as a two element vector <code>c(1,7)</code>). But before we start, a word on the upcoming gambit: First, we should try replicate the results from the previous analysis to understand the machinery. Then, we can soften the regulations to become aware of the gained flexibility. But let’s move in a smoothed pace one step at the time.</p>
+<div id="negative_too-true-sclvals" class="section level4">
+<h4>negative_too = TRUE &amp; sclvals</h4>
+<p>To repeat the previous results, we need to re-reverse <code>uni</code>. <code>disjoint()</code> lends you a hand with that. There are two arguments you need to manipulate (see <code>args(disjoint)</code>): Set (1) <code>negative_too = TRUE</code> and (2) <code>sclvals</code>. <code>sclvals</code> catches the start- and endpoint of your set of items. For example, the <code>trust</code> data set ranges between 1 (no trust at all) and 7 (great deal of trust). In practice, this means: <code>sclvals = c(1,7)</code>.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>(d <span class="ot">&lt;-</span> <span class="fu">disjoint</span>(ntrust, <span class="at">mrit_min =</span> <span class="fl">0.55</span>, <span class="at">negative_too =</span> <span class="cn">TRUE</span>, <span class="at">sclvals =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">7</span>)))</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; disjoint() didn&#39;t reverse an item.</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $scl_1</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    mrit rbar alpha</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; eupalmnt, eucomisn 0.92 0.92  0.96</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; polpati            0.64 0.72  0.89</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; fedgovt            0.68 0.67  0.89</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; bundtag            0.70 0.64  0.90</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; judsyst            0.58 0.59  0.90</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; fccourt            0.58 0.55  0.90</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $scl_2</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             mrit rbar alpha</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; newsppr, tv 0.67 0.67   0.8</span></span></code></pre></div>
+<p><code>disjoint()</code> did not reverse an item? Right, that move was a bit unfair. But as we know from prior analyses, <code>uni</code> is not included in any of <code>disjoint()</code>’s fragments. So we should actually not expect <code>disjoint()</code> to reverse it. However, if <code>uni</code> is not part a fragment it might be soaked up with <code>overlap()</code>. So let’s move on. Because we stored the <code>disjoint()</code>’s result in <code>d</code>, we can simply stick it into <code>overlap()</code>. But do not forget to tell <code>overlap()</code> that it has permission to include reversed items. For convenience, you don’t need to specify <code>sclvals</code> twice. <code>overlap()</code> remembers the start- and endpoint you set with <code>disjoint()</code> (see <code>attributes(d)$sclvals</code>).</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">overlap</span>(d,</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Note: overlap() remembers the scaling values from disjoint()</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">mrit_min =</span> <span class="fl">0.4</span>, <span class="at">negative_too =</span> <span class="cn">TRUE</span>, <span class="at">sclvals =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">7</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; overlap() reversed the following item(s):</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; - uni</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $scl_1</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    mrit rbar alpha</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; eupalmnt, eucomisn 0.92 0.92  0.96</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; polpati            0.64 0.72  0.89</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; fedgovt            0.68 0.67  0.89</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; bundtag            0.70 0.64  0.90</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; judsyst            0.58 0.59  0.90</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; fccourt            0.58 0.55  0.90</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; police             0.52 0.52  0.90</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; newsppr            0.52 0.49  0.90</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tv                 0.52 0.47  0.90</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; uni                0.49 0.45  0.90</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; munadmin           0.47 0.43  0.90</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; healserv           0.42 0.40  0.90</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $scl_2</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             mrit rbar alpha</span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; newsppr, tv 0.67 0.67  0.80</span></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; polpati     0.48 0.51  0.76</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; eucomisn    0.57 0.49  0.80</span></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; eupalmnt    0.73 0.53  0.85</span></span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; fedgovt     0.67 0.53  0.87</span></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; bundtag     0.69 0.53  0.89</span></span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; judsyst     0.58 0.51  0.89</span></span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; fccourt     0.57 0.49  0.90</span></span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; police      0.52 0.47  0.90</span></span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; uni         0.49 0.45  0.90</span></span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; munadmin    0.47 0.43  0.90</span></span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; healserv    0.42 0.40  0.90</span></span></code></pre></div>
+<blockquote>
+<p><strong>Note</strong>: I tried to design both functions to act very user-friendly. <code>disjoint()</code> and <code>overlap()</code> will both let you know, if they reverse a variable. And if so, which one.</p>
+</blockquote>
+</div>
+</div>
+<div id="another-made-up-but-auto-didactic-example" class="section level2">
+<h2>Another made up (but auto-didactic) example</h2>
+<p>In the following snippet I reversed a core item of the second fragment. Make predictions of what will happen and why. Keep them in mind and see if they match the following output.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>ntrust <span class="ot">&lt;-</span> <span class="fu">within</span>(trust, tv <span class="ot">&lt;-</span> <span class="dv">8</span> <span class="sc">-</span> tv)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">overlap</span>(</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">disjoint</span>(ntrust, <span class="at">mrit_min =</span> <span class="fl">0.55</span>, <span class="at">negative_too =</span> <span class="cn">TRUE</span>, <span class="at">sclvals =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">7</span>)),</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">mrit_min =</span> <span class="fl">0.4</span>, <span class="at">negative_too =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; disjoint() didn&#39;t reverse an item.</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; overlap() reversed the following item(s):</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; - tv</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $scl_1</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    mrit rbar alpha</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; eupalmnt, eucomisn 0.92 0.92  0.96</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; polpati            0.64 0.72  0.89</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; fedgovt            0.68 0.67  0.89</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; bundtag            0.70 0.64  0.90</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; judsyst            0.58 0.59  0.90</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; fccourt            0.58 0.55  0.90</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; police             0.52 0.52  0.90</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; newsppr            0.52 0.49  0.90</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tv                 0.52 0.47  0.90</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; uni                0.49 0.45  0.90</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; munadmin           0.47 0.43  0.90</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; healserv           0.42 0.40  0.90</span></span></code></pre></div>
+</div>
+<div id="different-types-of-scales" class="section level2">
+<h2>Different types of scales</h2>
+<p>There are three different types of scales which <code>disjoint()</code> and <code>overlap()</code> can handle. They all have in common that the underlying variables are real numeric vectors in R (either integers or objects of type <code>double</code>, see <code>?typeof</code>). If you enable the <code>negative_too = TRUE</code> option <code>elisr</code>’s wizards reverse:</p>
+<ol style="list-style-type: decimal">
+<li><p>Numeric scales starting at 1 (e.g., “1 2 3 4 5 6 7”). Both functions use the formula <span class="math inline">\((\max sclval + 1) - x\)</span> when setting <code>scalvals = c(1,7)</code> in this case.</p></li>
+<li><p>Numeric scales starting at 0 (e.g., &quot;0 1 2 3 4 5 6 7). The formula I used is <span class="math inline">\(\max sclval - x\)</span>. Set <code>sclvals = c(0,7)</code>.</p></li>
+<li><p>Numeric scales starting below 0 (e.g., “-3 -2 -1 0 -1 -2 -3”). The workhorse bases simply on the formula <code>x * (-1)</code>. Set <code>sclvals = c(-3,3)</code>.</p></li>
+</ol>
+<p>In my experience, those three options cover a wide range of applications. Keep in mind, however, that the various input possibilities do not stop with the above-mentioned examples. The only thing holding you back is defined by the logic of the reversing rule itself. But within that range, you are free to enter whatever you like.</p>
+</div>
+<div id="handle-items-with-varying-start--and-endpoints" class="section level2">
+<h2>Handle items with varying start- and endpoints</h2>
+<p>To be clear, <code>elisr</code> offers no way to tackle the start-endpoint issue internally. You have to face and overcome this obstacle yourself. But it is worth mentioning that neither <code>overlap()</code> nor <code>disjoint()</code> will complain. They silently obey and apply the algorithm to the given list of variables.</p>
+</div>
+<div id="set-up-your-own-fragment" class="section level2">
+<h2>Set up your own fragment</h2>
+<p>Sometimes you will have a concrete idea of how a fragment looks like. In this case you want to predetermine the fragment and let <code>overlap()</code> soak up additional variables afterward. Prespecifying the variables that form your fragment is straight forward. However, the steps you need to perform differ slightly from those used so far. If you want to predetermine a fragment, just pass the reduced version of your data frame to <code>disjoint()</code> – but now set <code>mrit_min = 0</code>. The second crux is to overwrite <code>disjoint()</code>’s data frame attribute with the full list of variables you want to do the overlap with. Hand the modified object over to <code>overlap()</code> and that is it. If you are interested in why this additional step is necessary, read the note.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>frag <span class="ot">&lt;-</span> trust[<span class="fu">c</span>(<span class="st">&quot;tv&quot;</span>, <span class="st">&quot;bundtag&quot;</span>, <span class="st">&quot;fccourt&quot;</span>)]</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>pre <span class="ot">&lt;-</span> <span class="fu">disjoint</span>(<span class="at">df =</span> frag, <span class="at">mrit_min =</span> <span class="dv">0</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: mrit_min = 0: fragment is pre-determined.</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># overlap() uses this attribute to build the counterpart</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(pre)<span class="sc">$</span>df <span class="ot">&lt;-</span> trust</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>(msdf <span class="ot">&lt;-</span> <span class="fu">overlap</span>(pre, <span class="at">mrit_min =</span> <span class="fl">0.4</span>))</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $scl_1</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                  mrit rbar alpha</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; fccourt, bundtag 0.58 0.58  0.74</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tv               0.35 0.40  0.67</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; fedgovt          0.67 0.46  0.77</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; polpati          0.65 0.48  0.82</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; eucomisn         0.67 0.49  0.85</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; eupalmnt         0.75 0.51  0.88</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; judsyst          0.63 0.50  0.89</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; newsppr          0.58 0.49  0.90</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; police           0.52 0.47  0.90</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; uni              0.49 0.45  0.90</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; munadmin         0.47 0.43  0.90</span></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; healserv         0.42 0.40  0.90</span></span></code></pre></div>
+<blockquote>
+<p><strong>Note</strong>: By running <code>disjoint()</code> on a subset of trust items, the function memorizes <code>frag</code> from your call as its data frame attribute (see <code>attributes(pre)$df</code>). The moment you commission <code>overlap()</code>, the function accesses <code>disjoint()</code>’s attributes. In this case <code>overlap()</code> tries to evaluate <code>df = core</code>. Why? Remember that <code>overlap()</code> needs an idea of the variables it has to consider for the extension. To find inspiration, it evaluates the <code>df</code> argument and separates the items within the given fragment from those left in the data frame. But because the variables in the fragment are equal to those in the data set, its counterpart is empty. In other words, there are no items to extend the fragment with. If we set this attribute manually however, we sneak in a bunch of new variables and thus instruct <code>overlap()</code> to pick up items from the newly defined object (in this case <code>trust</code>).</p>
+</blockquote>
+<div id="warning" class="section level4">
+<h4>Warning</h4>
+<p>Please be aware that predetermining fragments is an advanced application. It is a serious change in <code>elisr</code>’s internal mechanism, because you bypass a great bunch of internal security measures. So, assure that at least the predetermined variables are a real subset of the data frame you have planned to assign as an attribute.</p>
+</div>
+</div>
+<div id="working-with-the-results" class="section level2">
+<h2>Working with the results</h2>
+<p>In the previous chapters I mentioned <code>print.msdf()</code>. Remember, the idea was to make use of the fact, that R internally wraps <code>msdf</code> in <code>print()</code> and intervene into this process. <code>print()</code> now passes the work on to the <code>print.msdf()</code>, which presents the result as follows:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>(msdf <span class="ot">&lt;-</span> <span class="fu">overlap</span>(</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">disjoint</span>(ntrust, <span class="at">mrit_min =</span> <span class="fl">0.55</span>, <span class="at">negative_too =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sclvals =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">7</span>)),</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Note: overlap() remembers the scaling values from disjoint()</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">mrit_min =</span> <span class="fl">0.4</span>, <span class="at">negative_too =</span> <span class="cn">TRUE</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; disjoint() didn&#39;t reverse an item.</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; overlap() reversed the following item(s):</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; - tv</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $scl_1</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    mrit rbar alpha</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; eupalmnt, eucomisn 0.92 0.92  0.96</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; polpati            0.64 0.72  0.89</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; fedgovt            0.68 0.67  0.89</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; bundtag            0.70 0.64  0.90</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; judsyst            0.58 0.59  0.90</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; fccourt            0.58 0.55  0.90</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; police             0.52 0.52  0.90</span></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; newsppr            0.52 0.49  0.90</span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tv                 0.52 0.47  0.90</span></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; uni                0.49 0.45  0.90</span></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; munadmin           0.47 0.43  0.90</span></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; healserv           0.42 0.40  0.90</span></span></code></pre></div>
+<p>The question is, why am I telling you all this? Well, to work with the results you need to understand that what you see is <em>not</em> what you actually get. <code>print()</code>’s version of <code>overlap()</code>’s and <code>disjoint()</code>’s output is truly a bunch of summary statistics applied to it (see <code>?print.msdf</code>). To put it another way, <code>disjoint()</code>’s and <code>overlap()</code>’s outcomes are hidden by this internal printing mechanism. But you can break through this process by addressing one of <code>msdf</code>’s elements directly. This procedure will reveal the internally sorted (and in this case partially reversed, plus extended) data list. To keep things organized, the following output shows only the first six values (see <code>?head</code>) of <code>msdf</code>’s component one: <code>scl_1</code>.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(msdf<span class="sc">$</span>scl_1)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   eupalmnt eucomisn polpati fedgovt bundtag judsyst fccourt police newsppr tv</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1        4        3       4       5       5       3       7      5       6  7</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2        4        4       1       2       4       3       5      5       4  3</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3        4        4       5       6       6       6       6      5       4  4</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4        3        3       3       3       3       3       4      3       1  1</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5        1        1       1       1       1       2       1      2       1  1</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6        5       NA       4       6       5       4       5      7       3  4</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   uni munadmin healserv</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1   4        5        6</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2   5        5        5</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3   5        3        6</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4   3        3        6</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5   5        4        5</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6   4        7        5</span></span></code></pre></div>
+<blockquote>
+<p><strong>Note</strong>: There is one tiny thing I want to point out in addition. Look at <code>tv</code>. It is reversed now. Hence, the reversing process was successful. If you want to prove that, just compare the outcome to previous results in this section and you will see that they are identical (type: <code>overlap(disjoint(trust, mrit_min = 0.55), mrit_min = 0.4</code>). In a nutshell: <code>disjoint()</code> and <code>overlap()</code> both keep the reversed form of their variables. This behavior is thought to make further analysis as convenient as possible.</p>
+</blockquote>
+<p>Further analysis of the result is mandatory, remember? That is why I made the functions translate the actual output into an object type most connecting packages can handle. My suggestion is a <code>data.frame</code>. To become aware of the <code>data.frame</code> inside <code>msdf</code>, type <code>msdf$scl_1</code> and we break through its inherent structure.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(msdf<span class="sc">$</span>scl_1)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;data.frame&quot;</span></span></code></pre></div>
+<div id="a-final-unequivocal-statement-on-elisrs-results" class="section level4">
+<h4>A final unequivocal statement on <code>elisr</code>’s results</h4>
+<p>I want to be clear on this point: What you really get from applying <code>disjoint()</code> and <code>overlap()</code> is an intermediate. A good hint is <code>mrit</code>. <code>mrit</code> is, the <em>marginal</em> corrected item-total correlation. Remember what that means – the relationship between the sum-score of the items in a fragment at some specific point of the scale development process and the item which is considered for admission. Hence, the output represents the construction from a bottom-up perspective. To put it another way, when building scales from scratch <code>mrit</code>, <code>rbar</code>, and <code>alpha</code> keep track of the development progress, summarizing the gradually emerging scales based on the principles of classical test theory. However, these results can differ significantly from a more comprehensive (reliability) analysis of the proposed scale(s). With this in mind, I will end the manual with a place to (re-)start.</p>
+</div>
+</div>
+<div id="a-place-to-restart" class="section level2">
+<h2>A place to restart</h2>
+<p>There are several options to continue. But the one which I find most appealing is part of the <code>psych</code> package. The object of desire is called <code>alpha()</code>. This neat function provides a bunch of helpful diagnostic information on the proposed scale(s). The snippet below checks if <code>psych</code> is present and gives advise on how to proceed. Just copy and run the code.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">requireNamespace</span>(<span class="st">&quot;psych&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;`psych` is present. Ready to go!</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;Please install the psych package to continue, type:</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">message</span>(<span class="st">&quot;install.packages(&#39;psych&#39;)&quot;</span>)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; `psych` is present. Ready to go!</span></span></code></pre></div>
+<p>Once you have installed and loaded <code>psych</code>, there are two (well, actually three) additional things you need to do. First, store the result of the exploratory analysis into an object of choice. Second, hand the proposed scale over to <code>alpha()</code>. Third, type <code>?alpha()</code> and get used to it. Its man page is a good place to (re-)start and <code>alpha()</code>’s vignette can further equip your data-analytic toolbox for the upcoming analysis. Since <code>msdf</code> already offers a scale to analyze, you can jump right into action. Consider for example <code>msdf</code>’s <code>scl_1</code> to continue.</p>
+<p>This is a perfect place to stop. I am sure, you have gained enough understanding, to confidently perform analysis in this framework. By working through the examples above, you have grasped what is going on under <code>elisr</code>’s hood, and did also encounter some benefits of this approach. However, if you want to become more acquainted with the heuristic potential that lays out with this approach, do not overlook the references below.</p>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2 class="unnumbered">References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-tms_2001" class="csl-entry">
+Müller-Schneider, Thomas. 2001. <span>“Multiple Skalierung Nach Dem Kristallisationsprinzip / Multiple Scaling According to the Principle of Crystallization.”</span> <em>Zeitschrift Für Soziologie</em> 30 (4): 305–15. <a href="https://doi.org/doi:10.1515/zfsoz-2001-0404">https://doi.org/doi:10.1515/zfsoz-2001-0404</a>.
+</div>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
