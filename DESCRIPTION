@@ -1,7 +1,7 @@
 Type: Package
 Package: elisr
 Title: Exploratory Likert Scaling
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: 
     c(person(given = "Steven",
              family = "Bißantz",
@@ -28,6 +28,7 @@ BugReports: https://github.com/sbissantz/elisr/issues
 Depends: R (>= 4.0.0)
 Imports: stats (>= 4.0.0)
 Suggests: covr, devtools, knitr, pkgdown, psych, rmarkdown, testthat
+        (>= 3.0.0)
 VignetteBuilder: knitr
 Config/testthat/edition: 3
 Encoding: UTF-8
@@ -35,9 +36,9 @@ Language: en, de
 LazyData: true
 RoxygenNote: 7.1.1
 NeedsCompilation: no
-Packaged: 2021-05-04 17:44:37 UTC; steven
+Packaged: 2021-05-13 11:56:16 UTC; steven
 Author: Steven Bißantz [aut, cre],
   Thomas Müller-Schneider [ctb]
 Maintainer: Steven Bißantz <steven.bissantz@gmail.com>
 Repository: CRAN
-Date/Publication: 2021-05-06 07:50:05 UTC
+Date/Publication: 2021-05-15 22:00:02 UTC

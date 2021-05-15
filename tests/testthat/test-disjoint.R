@@ -1,17 +1,17 @@
 test_that("positive scaling", {
+   skip_if_not(capabilities("long.double"),
+               message = "noLD -- skip. Denied to increase tolerance.")
    msdf <- disjoint(trust, mrit_min = .55)
-   eupalmnt <- trust[, "eupalmnt"]
-   expect_equal(length(msdf), 2)
-   expect_equal(length(msdf$scl_1), 7)
-   expect_equal(length(msdf$scl_2), 2)
-   expect_equal(msdf$scl_1[, 1], eupalmnt)
+   len <- vapply(msdf, length, FUN.VALUE = integer(1))
+   expect_setequal(len, c(7L, 2L))
 })
 
 test_that("negative scaling", {
+   skip_if_not(capabilities("long.double"),
+               message = "noLD -- skip. Denied to increase tolerance.")
    msdf <- disjoint(trust, mrit_min = .55)
-   msdf_new <- disjoint(df = {
-     trust$polpati <- (1 + 7) - trust[, "polpati"]
-     trust
-   }, mrit_min = .55, negative_too = TRUE, sclvals = c(1, 7))
-   expect_equal(msdf$scl_1[, "polpati"], msdf_new$scl_1[, "polpati"])
+   msdf_rev <- disjoint(
+      within(trust, polpati <- 8 - polpati),
+      mrit_min = .55, negative_too = TRUE, sclvals = c(1, 7))
+   expect_setequal(msdf$scl_1[, "polpati"],  msdf_rev$scl_1[, "polpati"])
 })
